@@ -67,7 +67,7 @@ class CartaoCracha extends StatelessWidget {
           const SizedBox(height: 15),
 
           const Text(
-            'Isaac Gonçalves',
+            'Isadora da Silva Vasconcelos',
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -97,7 +97,7 @@ class CartaoCracha extends StatelessWidget {
                 color: Colors.blueAccent,
               ),
               SizedBox(width: 10),
-              Text('isaac@email.com'),
+              Text('isadora@email.com'),
             ],
           ),
 
