@@ -20,6 +20,7 @@ class CartaoEstudante extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 320,
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.green.shade50,
         borderRadius: BorderRadius.circular(16),
@@ -36,12 +37,13 @@ class CartaoEstudante extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             CircleAvatar(
               radius: 40,
+              backgroundColor: Colors.green,
               foregroundImage: NetworkImage(imagem),
             ),
 
@@ -49,7 +51,6 @@ class CartaoEstudante extends StatelessWidget {
 
             Text(
               nome,
-              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -59,7 +60,6 @@ class CartaoEstudante extends StatelessWidget {
 
             Text(
               curso,
-              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
@@ -97,12 +97,10 @@ class CartaoEstudante extends StatelessWidget {
                   color: Colors.green,
                 ),
                 const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    email,
-                    style: const TextStyle(
-                      fontSize: 14,
-                    ),
+                Text(
+                  email,
+                  style: const TextStyle(
+                    fontSize: 14,
                   ),
                 ),
               ],

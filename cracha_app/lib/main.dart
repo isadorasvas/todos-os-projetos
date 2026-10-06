@@ -1,119 +1,187 @@
-
 import 'package:flutter/material.dart';
-import 'models/observacao.dart';
-import 'widgets/formulario_observacao.dart';
-import 'widgets/lista_observacoes.dart';
 
 void main() {
-  runApp(const FormApp());
+  runApp(const CrachaApp());
 }
 
-class FormApp extends StatelessWidget {
-  const FormApp({super.key});
+class CrachaApp extends StatelessWidget {
+  const CrachaApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Registro de Observações',
       debugShowCheckedModeBanner: false,
-
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.teal,
+      home: Scaffold(
+        backgroundColor: Colors.blueGrey[900],
+        appBar: AppBar(
+          title: const Text('Crachá Digital'),
+          centerTitle: true,
+          backgroundColor: Colors.blueGrey[800],
         ),
-        useMaterial3: true,
+        body: const Center(
+          child: CartaoCracha(),
+        ),
       ),
-
-      home: const HomePage(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final List<Observacao> _observacoes = [];
-
-  void _adicionarObservacao(Observacao novaObs) {
-    setState(() {
-      _observacoes.add(novaObs);
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          'Total de registros: ${_observacoes.length}',
-        ),
-        backgroundColor: Colors.teal,
-      ),
-    );
-  }
+class CartaoCracha extends StatelessWidget {
+  const CartaoCracha({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'App Observações de Campo',
-        ),
-        backgroundColor: Colors.teal,
-        foregroundColor: Colors.white,
-        centerTitle: true,
-      ),
-
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            FormularioObservacao(
-              onAdicionar: _adicionarObservacao,
-            ),
-
-            const Divider(
-              height: 30,
-              thickness: 2,
-            ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
-              child: Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Histórico de Registros',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-
-                  Chip(
-                    label: Text(
-                      '${_observacoes.length} registros',
-                    ),
-                    backgroundColor: Colors.teal.shade50,
-                  ),
-                ],
-              ),
-            ),
-
-            ListaObservacoes(
-              observacoes: _observacoes,
-            ),
+    return Container(
+      width: 350,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        // Exercício 4: fundo gradiente
+        gradient: const LinearGradient(
+          colors: [
+            Colors.white,
+            Colors.blueGrey,
           ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
         ),
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 10,
+            offset: Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Exercício 1: imagem usando NetworkImage
+          const CircleAvatar(
+            radius: 50,
+            backgroundImage: NetworkImage(
+              'https://i.pravatar.cc/150',
+            ),
+          ),
+
+          const SizedBox(height: 15),
+
+          const Text(
+            'Isaac Gonçalves',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+          ),
+
+          const Text(
+            'Desenvolvedor Flutter',
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey,
+              letterSpacing: 1.2,
+            ),
+          ),
+
+          const Divider(
+            height: 30,
+            thickness: 1,
+          ),
+
+          // Informações
+          const Row(
+            children: [
+              Icon(
+                Icons.email,
+                color: Colors.blueAccent,
+              ),
+              SizedBox(width: 10),
+              Text('isaac@email.com'),
+            ],
+          ),
+
+          const SizedBox(height: 10),
+
+          const Row(
+            children: [
+              Icon(
+                Icons.phone,
+                color: Colors.blueAccent,
+              ),
+              SizedBox(width: 10),
+              Text('+55 (11) 99999-9999'),
+            ],
+          ),
+
+          const SizedBox(height: 20),
+
+          // Exercício 2: Sobre Mim
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Sobre Mim',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 5),
+
+          const Text(
+            'Sou estudante de programação e estou aprendendo '
+            'a desenvolver aplicativos usando Flutter.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.black87,
+            ),
+          ),
+
+          const SizedBox(height: 15),
+
+          // Exercício 3: habilidades usando Chip
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Habilidades',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 8),
+
+          const Wrap(
+            spacing: 6,
+            runSpacing: 5,
+            children: [
+              Chip(
+                label: Text('Flutter'),
+                avatar: Icon(Icons.phone_android, size: 18),
+              ),
+              Chip(
+                label: Text('Dart'),
+                avatar: Icon(Icons.code, size: 18),
+              ),
+              Chip(
+                label: Text('HTML'),
+                avatar: Icon(Icons.web, size: 18),
+              ),
+              Chip(
+                label: Text('CSS'),
+                avatar: Icon(Icons.palette, size: 18),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
 }
-
-
-
-
